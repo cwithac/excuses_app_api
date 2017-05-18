@@ -18,3 +18,9 @@ Excuse.create([
     { content: "I don’t actually like you.", count: 1 },
     { content: "Once I realized you weren’t going to set me up with your brother/sister, I didn’t need to talk to you anymore.", count: 1 }
 ]);
+
+Ocassion.create([
+  { title: "Missed deadline" }
+  { title: "Avoiding an event" }
+  { title: "Wrongdoing to another" }
+  ])
