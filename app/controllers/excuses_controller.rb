@@ -5,12 +5,13 @@ class ExcusesController < ApplicationController
   def index
     @excuses = Excuse.all
 
-    render json: @excuses
+    render json: {status: 200, excuses: @excuses}
   end
 
   # GET /excuses/1
   def show
-    render json: @excuse
+    excuse = Excuse.find(params[:id])
+    render json: {status: 200, excuse: @excuse}
   end
 
   # POST /excuses
@@ -18,24 +19,29 @@ class ExcusesController < ApplicationController
     @excuse = Excuse.new(excuse_params)
 
     if @excuse.save
-      render json: @excuse, status: :created, location: @excuse
+      render json: { status: 201, excuse: @excuse }
     else
-      render json: @excuse.errors, status: :unprocessable_entity
+      render json: { status: 422, excuse: @excuse }
     end
   end
 
   # PATCH/PUT /excuses/1
   def update
-    if @excuse.update(excuse_params)
-      render json: @excuse
-    else
-      render json: @excuse.errors, status: :unprocessable_entity
-    end
+    excuse = Excuse.find(params[:id])
+    excuse.update(excuse_params)
+    render json: { status: 200, excuse: excuse }
+    # if @excuse.update(excuse_params)
+    #   render json: @excuse
+    # else
+    #   render json: @excuse.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /excuses/1
   def destroy
-    @excuse.destroy
+    excuse = Excuse.destroy(params[:id])
+    render json: { status: 204 }
+    # @excuse.destroy
   end
 
   private
