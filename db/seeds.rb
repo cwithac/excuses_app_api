@@ -23,4 +23,20 @@ Occasion.create([
   { title: "Missed deadline" },
   { title: "Avoiding an event" },
   { title: "Wrongdoing to another" }
-  ])
+]);
+
+Relation.create([
+  { occasion_id: 1, excuse_id: 1 },
+  { occasion_id: 1, excuse_id: 2 },
+  { occasion_id: 1, excuse_id: 3 },
+  { occasion_id: 2, excuse_id: 3 },
+  { occasion_id: 1, excuse_id: 4 },
+  { occasion_id: 2, excuse_id: 4 },
+  { occasion_id: 1, excuse_id: 5 },
+  { occasion_id: 2, excuse_id: 5 },
+  { occasion_id: 2, excuse_id: 6 },
+  { occasion_id: 2, excuse_id: 7 },
+  { occasion_id: 2, excuse_id: 8 },
+  { occasion_id: 3, excuse_id: 9 },
+  { occasion_id: 3, excuse_id: 10 }
+]);
