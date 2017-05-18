@@ -5,12 +5,19 @@ class RelationsController < ApplicationController
   def index
     @relations = Relation.all
 
-    render json: @relations
+    render json: @relations.to_json(include: [:occasion, :excuse])
   end
 
   # GET /relations/1
   def show
-    render json: @relation
+    # render json: @relation
+    relation_hash = {
+      occasion: Occasion.find(@relation.occasion_id).title,
+      excuse: Excuse.find(@relation.excuse_id).content,
+      count: Excuse.find(@relation.excuse_id).count
+    }
+
+    render json: relation_hash
   end
 
   # POST /relations
