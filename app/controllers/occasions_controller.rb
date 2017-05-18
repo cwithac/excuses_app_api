@@ -5,33 +5,34 @@ class OccasionsController < ApplicationController
   def index
     @occasions = Occasion.all
 
-    render json: @occasions
+    render json: {status: 200, occasions: @occasions}
   end
 
   # GET /occasions/1
   def show
-    render json: @occasion
+    occasion = Occasion.find(params[:id])
+    render json: {status: 200, occasions: @occasions}
   end
 
   # POST /occasions
-  def create
-    @occasion = Occasion.new(occasion_params)
-
-    if @occasion.save
-      render json: @occasion, status: :created, location: @occasion
-    else
-      render json: @occasion.errors, status: :unprocessable_entity
-    end
-  end
+  # def create
+  #   @occasion = Occasion.new(occasion_params)
+  #
+  #   if @occasion.save
+  #     render json: @occasion, status: :created, location: @occasion
+  #   else
+  #     render json: @occasion.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # PATCH/PUT /occasions/1
-  def update
-    if @occasion.update(occasion_params)
-      render json: @occasion
-    else
-      render json: @occasion.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @occasion.update(occasion_params)
+  #     render json: @occasion
+  #   else
+  #     render json: @occasion.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /occasions/1
   def destroy
@@ -45,7 +46,7 @@ class OccasionsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def occasion_params
-      params.require(:occasion).permit(:title)
-    end
+    # def occasion_params
+    #   params.require(:occasion).permit(:title)
+    # end
 end
