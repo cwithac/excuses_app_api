@@ -20,7 +20,7 @@ Excuse.create([
 ]);
 
 Ocassion.create([
-  { title: "Missed deadline" }
-  { title: "Avoiding an event" }
+  { title: "Missed deadline" },
+  { title: "Avoiding an event" },
   { title: "Wrongdoing to another" }
   ])
