@@ -8,10 +8,6 @@ class UsersController < ApplicationController
     user = User.find_by(username:params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
-      # current_user = {
-      #   id: user.id,
-      #   username: user.name
-      # }
       render json: {status: 200, token: token, user: user}
     else
       render json: {status: 401, message: "Unauthorized"}
@@ -21,7 +17,6 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
     puts "BEARER TOKEN"
     puts header = request.env["HTTP_AUTHORIZATION"]
 
-    pattern = /ˆBearer /
+    pattern = /^Bearer /
     puts "TOKEN WITHOUT BEARER"
     puts header.gsub(pattern, '') if header && header.match(pattern)
     header.gsub(pattern, '') if header && header.match(pattern)
