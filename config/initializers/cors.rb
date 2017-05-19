@@ -7,10 +7,10 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:8000'
+    origins 'localhost:8000', 'https://find-the-perfect-excuse.herokuapp.com/'
 
     resource '*',
       headers: :any,
-      methods: [:get, :options, :head]
+      methods: [:get, :post, :update, :delete, :options, :head]
   end
 end
