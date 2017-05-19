@@ -16,13 +16,25 @@ class ExcusesController < ApplicationController
 
   # POST /excuses
   def create
-    @excuse = Excuse.new(excuse_params)
+    excusehash = {
+      content: excuse_params[:content],
+      count: excuse_params[:count]
+    }
+
+    @excuse = Excuse.new(excusehash)
 
     if @excuse.save
+      occasiontitle = Occasion.find_by(title: excuse_params[:occasion])
+
+      relationtitle = Relation.create(occasion_id: occasiontitle.id, excuse_id: @excuse.id)
+
       render json: { status: 201, excuse: @excuse }
     else
       render json: { status: 422, excuse: @excuse }
     end
+
+    # render json: excuse_params
+
   end
 
   # PATCH/PUT /excuses/1
@@ -52,6 +64,6 @@ class ExcusesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def excuse_params
-      params.require(:excuse).permit(:content, :count)
+      params.require(:excuse).permit(:content, :count, :occasion)
     end
 end
