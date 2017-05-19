@@ -5,19 +5,22 @@ class UsersController < ApplicationController
 
   # login action
   def login
+    # find user based on the username entered
     user = User.find_by(username:params[:user][:username])
+    # check if a user by that username was found and if the password entered
+    # matches
     if user && user.authenticate(params[:user][:password])
+      # create webtoken
       token = create_token(user.id, user.username)
-      render json: {status: 200, token: token, user: user}
+      # edit user data so that no password information will be send to frontend
+      editedUser = user
+      editedUser.password_digest = ''
+      # send success response to server
+      render json: {status: 200, token: token, user: editedUser}
     else
+      # if no match was found, send fail message to server
       render json: {status: 401, message: "Unauthorized"}
     end
-  end
-
-  # GET /users
-  def index
-    @users = User.all
-    render json: @users
   end
 
   # GET /users/1
@@ -29,24 +32,35 @@ class UsersController < ApplicationController
   def create
     @user = User.new(username:params[:user][:username], password:params[:user][:password])
     if @user.save
-      render json: @user, status: :created, location: @user
+      # edit user data so that no password information will be send to frontend
+      editedUser = @user
+      editedUser.password_digest = ''
+      render json: {status: 201, user: editedUser}
     else
-      render json: @user.errors, status: :unprocessable_entity
+      # edit user data so that no password information will be send to frontend
+      editedUser = @user
+      editedUser.password_digest = ''
+      render json: {status: 422, user: editedUser}
     end
   end
 
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      editedUser = @user
+      editedUser.password_digest = ''
+      render json: {status: 200, user: editedUser}
     else
-      render json: @user.errors, status: :unprocessable_entity
+      editedUser = @user
+      editedUser.password_digest = ''
+      render json: {status: 422, user: editedUser}
     end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
+    render json: {status: 204}
   end
 
   private
