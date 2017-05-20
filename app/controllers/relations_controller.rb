@@ -42,7 +42,9 @@ class RelationsController < ApplicationController
 
   # DELETE /relations/1
   def destroy
+    excuseFound = Excuse.find(@relation.excuse_id)
     @relation.destroy
+    excuseFound.destroy
   end
 
   private
