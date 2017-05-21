@@ -35,4 +35,12 @@ class ApplicationController < ActionController::API
     puts "params: #{params[:id]}"
     render json: {status: 401, message: 'Unauthorized'} unless get_current_user.id == params[:id].to_i
   end
+
+  def authorize_excuse_action
+      puts "AUTHORIZE EXCUSE ACTION"
+      puts "user id: #{get_current_user.id}"
+      puts "params: #{excuse_params[:user_id]}"
+      render json: {status: 401, message: 'Unauthorized'} unless get_current_user.id == excuse_params[:user_id].to_i
+    end
+
 end
