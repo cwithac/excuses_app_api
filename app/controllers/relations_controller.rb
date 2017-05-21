@@ -1,5 +1,7 @@
 class RelationsController < ApplicationController
   before_action :set_relation, only: [:show, :update, :destroy]
+  before_action :authenticate_token, except: [:index]
+  before_action :authorize_delete_action, except: [:index]
 
   # GET /relations
   def index
