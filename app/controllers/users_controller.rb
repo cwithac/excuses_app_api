@@ -59,6 +59,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user.excuses.destroy(@user.excuses)
     @user.destroy
     render json: {status: 204}
   end
