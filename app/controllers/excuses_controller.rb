@@ -1,5 +1,8 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
+  before_action :authenticate_token, except: [:index]
+  before_action :authorize_excuse_action, except: [:index]
+
 
   # GET /excuses
   def index
@@ -18,7 +21,8 @@ class ExcusesController < ApplicationController
   def create
     excusehash = {
       content: excuse_params[:content],
-      count: excuse_params[:count]
+      count: excuse_params[:count],
+      user_id: excuse_params[:user_id]
     }
 
     @excuse = Excuse.new(excusehash)
@@ -64,6 +68,6 @@ class ExcusesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def excuse_params
-      params.require(:excuse).permit(:content, :count, :occasion)
+      params.require(:excuse).permit(:content, :count, :occasion, :user_id)
     end
 end
