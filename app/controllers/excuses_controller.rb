@@ -1,7 +1,7 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
-  # before_action :authenticate_token, except: [:index]
-  # before_action :authorize_user, except: [:index, :destroy]
+  before_action :authenticate_token, except: [:index]
+  before_action :authorize_excuse_action, except: [:index]
 
 
   # GET /excuses
