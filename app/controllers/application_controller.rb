@@ -42,4 +42,13 @@ class ApplicationController < ActionController::API
     puts "params: #{excuse_params[:user_id]}"
     render json: {status: 401, message: 'Unauthorized'} unless get_current_user.id == excuse_params[:user_id].to_i
   end
+
+  def authorize_delete_action
+    puts "AUTHORIZE DELETE ACTION"
+    puts "user id: #{get_current_user.id}"
+    puts "params: #{params[:id]}"
+    relation = Relation.find(params[:id])
+    entry = Excuse.find(relation.excuse_id)
+    render json: {status: 401, message: 'Unauthorized'} unless get_current_user.id == entry.user_id
+  end
 end
