@@ -22,31 +22,32 @@ class RelationsController < ApplicationController
     render json: relation_hash
   end
 
-  # POST /relations
-  def create
-    @relation = Relation.new(relation_params)
-
-    if @relation.save
-      render json: @relation, status: :created, location: @relation
-    else
-      render json: @relation.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /relations/1
-  def update
-    if @relation.update(relation_params)
-      render json: @relation
-    else
-      render json: @relation.errors, status: :unprocessable_entity
-    end
-  end
+  # # POST /relations
+  # def create
+  #   @relation = Relation.new(relation_params)
+  #
+  #   if @relation.save
+  #     render json: @relation, status: :created, location: @relation
+  #   else
+  #     render json: @relation.errors, status: :unprocessable_entity
+  #   end
+  # end
+  #
+  # # PATCH/PUT /relations/1
+  # def update
+  #   if @relation.update(relation_params)
+  #     render json: @relation
+  #   else
+  #     render json: @relation.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /relations/1
   def destroy
     excuseFound = Excuse.find(@relation.excuse_id)
     @relation.destroy
     excuseFound.destroy
+    render json: { status: 204 }
   end
 
   private
