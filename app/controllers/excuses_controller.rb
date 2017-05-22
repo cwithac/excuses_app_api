@@ -44,12 +44,10 @@ class ExcusesController < ApplicationController
   # PATCH/PUT /excuses/1
   def update
     excuse = Excuse.find(params[:id])
-    excuse.update(excuse_params)
-    render json: { status: 200, excuse: excuse }
-    # if @excuse.update(excuse_params)
-    #   render json: @excuse
-    # else
-    #   render json: @excuse.errors, status: :unprocessable_entity
+    if excuse.update(excuse_params)
+      render json: { status: 200, excuse: excuse }
+     else
+       render json: { status: 422, excuse: excuse }
     # end
   end
 

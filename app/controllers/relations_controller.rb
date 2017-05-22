@@ -47,6 +47,7 @@ class RelationsController < ApplicationController
     excuseFound = Excuse.find(@relation.excuse_id)
     @relation.destroy
     excuseFound.destroy
+    render json: { status: 204 }
   end
 
   private
