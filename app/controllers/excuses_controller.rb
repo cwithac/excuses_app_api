@@ -4,18 +4,18 @@ class ExcusesController < ApplicationController
   before_action :authorize_excuse_action, except: [:index, :upvote]
 
 
-  # GET /excuses
-  def index
-    @excuses = Excuse.all
-
-    render json: {status: 200, excuses: @excuses}
-  end
-
-  # GET /excuses/1
-  def show
-    excuse = Excuse.find(params[:id])
-    render json: {status: 200, excuse: @excuse}
-  end
+  # # GET /excuses
+  # def index
+  #   @excuses = Excuse.all
+  #
+  #   render json: {status: 200, excuses: @excuses}
+  # end
+  #
+  # # GET /excuses/1
+  # def show
+  #   excuse = Excuse.find(params[:id])
+  #   render json: {status: 200, excuse: @excuse}
+  # end
 
   # POST /excuses
   def create
@@ -62,12 +62,12 @@ class ExcusesController < ApplicationController
     end
   end
 
-  # DELETE /excuses/1
-  def destroy
-    excuse = Excuse.destroy(params[:id])
-    render json: { status: 204 }
-    # @excuse.destroy
-  end
+  # # DELETE /excuses/1
+  # def destroy
+  #   excuse = Excuse.destroy(params[:id])
+  #   render json: { status: 204 }
+  #   # @excuse.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
