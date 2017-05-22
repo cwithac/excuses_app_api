@@ -1,7 +1,7 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
-  before_action :authenticate_token, except: [:index]
-  before_action :authorize_excuse_action, except: [:index]
+  before_action :authenticate_token, except: [:index, :upvote]
+  before_action :authorize_excuse_action, except: [:index, :upvote]
 
 
   # GET /excuses
@@ -51,6 +51,15 @@ class ExcusesController < ApplicationController
     # else
     #   render json: @excuse.errors, status: :unprocessable_entity
     # end
+  end
+
+  def upvote
+    excuse = Excuse.find(params[:id])
+    if excuse.update(count: excuse_params[:count].to_i)
+      render json: { status: 200, excuse: excuse }
+    else
+      render json: { status: 422, excuse: excuse, message: 'helooooo'}
+    end
   end
 
   # DELETE /excuses/1
