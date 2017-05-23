@@ -1,7 +1,7 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:index, :upvote]
-  before_action :authorize_excuse_create, except: [:index, :upvote, :update]
+  before_action :authorize_excuse_create, except: [:index, :upvote, :update, :create]
   before_action :authorize_excuse_update, except: [:index, :upvote, :create]
 
 
@@ -20,10 +20,12 @@ class ExcusesController < ApplicationController
 
   # POST /excuses
   def create
+    decoded_jwt = decode_token(bearer_token)
+
     excusehash = {
       content: excuse_params[:content],
       count: excuse_params[:count],
-      user_id: excuse_params[:user_id]
+      user_id: decoded_jwt[0]['user']['id']
     }
 
     @excuse = Excuse.new(excusehash)
@@ -49,7 +51,7 @@ class ExcusesController < ApplicationController
       render json: { status: 200, excuse: excuse }
      else
        render json: { status: 422, excuse: excuse }
-    # end
+    end
   end
 
   def upvote
