@@ -1,8 +1,8 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
-  before_action :authenticate_token, except: [:index, :upvote]
-  before_action :authorize_excuse_create, except: [:index, :upvote, :update, :create]
-  before_action :authorize_excuse_update, except: [:index, :upvote, :create]
+  before_action :authenticate_token, except: [:index, :show, :upvote]
+  before_action :authorize_excuse_create, except: [:index, :show, :upvote, :update, :create]
+  before_action :authorize_excuse_update, except: [:index, :show, :upvote, :create]
 
 
   # GET /excuses
