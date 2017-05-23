@@ -59,6 +59,10 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    excuses_arr = @user.excuses
+    excuses_arr.each do |item|
+      Relation.where(excuse_id: item).destroy_all
+    end
     @user.excuses.destroy(@user.excuses)
     @user.destroy
     render json: {status: 204}
