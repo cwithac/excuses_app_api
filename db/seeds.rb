@@ -19,11 +19,11 @@
 #     { content: "Once I realized you weren’t going to set me up with your brother/sister, I didn’t need to talk to you anymore.", count: 1 }
 # ]);
 
-Occasion.create([
-  { title: "Missed deadline" },
-  { title: "Avoiding an event" },
-  { title: "Wrongdoing to another" }
-]);
+# Occasion.create([
+#   { title: "Missed deadline" },
+#   { title: "Avoiding an event" },
+#   { title: "Wrongdoing to another" }
+# ]);
 
 # Relation.create([
 #   { occasion_id: 1, excuse_id: 1 },
