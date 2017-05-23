@@ -5,18 +5,18 @@ class ExcusesController < ApplicationController
   before_action :authorize_excuse_update, except: [:index, :upvote, :create]
 
 
-  # # GET /excuses
-  # def index
-  #   @excuses = Excuse.all
-  #
-  #   render json: {status: 200, excuses: @excuses}
-  # end
-  #
-  # # GET /excuses/1
-  # def show
-  #   excuse = Excuse.find(params[:id])
-  #   render json: {status: 200, excuse: @excuse}
-  # end
+  # GET /excuses
+  def index
+    @excuses = Excuse.all
+
+    render json: {status: 200, excuses: @excuses}
+  end
+
+  # GET /excuses/1
+  def show
+    excuse = Excuse.find(params[:id])
+    render json: {status: 200, excuse: @excuse}
+  end
 
   # POST /excuses
   def create
