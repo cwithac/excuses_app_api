@@ -11,7 +11,7 @@ class OccasionsController < ApplicationController
   # GET /occasions/1
   def show
     occasion = Occasion.find(params[:id])
-    render json: {status: 200, occasions: @occasions}
+    render json: {status: 200, occasions: occasion}
   end
 
   # POST /occasions

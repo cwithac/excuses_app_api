@@ -1,22 +1,22 @@
 class ExcusesController < ApplicationController
   before_action :set_excuse, only: [:show, :update, :destroy]
-  before_action :authenticate_token, except: [:index, :upvote]
-  before_action :authorize_excuse_create, except: [:index, :upvote, :update, :create]
-  before_action :authorize_excuse_update, except: [:index, :upvote, :create]
+  before_action :authenticate_token, except: [:index, :show, :upvote]
+  before_action :authorize_excuse_create, except: [:index, :show, :upvote, :update, :create]
+  before_action :authorize_excuse_update, except: [:index, :show, :upvote, :create]
 
 
-  # # GET /excuses
-  # def index
-  #   @excuses = Excuse.all
-  #
-  #   render json: {status: 200, excuses: @excuses}
-  # end
-  #
-  # # GET /excuses/1
-  # def show
-  #   excuse = Excuse.find(params[:id])
-  #   render json: {status: 200, excuse: @excuse}
-  # end
+  # GET /excuses
+  def index
+    @excuses = Excuse.all
+
+    render json: {status: 200, excuses: @excuses}
+  end
+
+  # GET /excuses/1
+  def show
+    excuse = Excuse.find(params[:id])
+    render json: {status: 200, excuse: @excuse}
+  end
 
   # POST /excuses
   def create
